@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import './App.css'
@@ -5,7 +6,8 @@ import Apartment from './pages/Apartment'
 
 function App() {
   return (
-    <HashRouter>
+    <ChakraProvider>
+      <HashRouter>
         <Routes>
           <Route
             path="/apartment"
@@ -17,6 +19,7 @@ function App() {
               <h1>Home</h1>} />
         </Routes>
       </HashRouter>
+    </ChakraProvider>
   )
 }
 

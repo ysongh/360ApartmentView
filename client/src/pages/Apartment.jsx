@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from '@chakra-ui/react'
 import ReactPannellum, { getConfig } from "react-pannellum"
 
 const imageURL1 = "https://www.shutterstock.com/shutterstock/photos/1175752585/display_1500/stock-photo--d-illustration-spherical-vr-degrees-a-seamless-panorama-of-the-room-and-room-of-light-1175752585.jpg"
@@ -42,7 +43,7 @@ function Apartment() {
         imageSource={image}
         config={config}
       />
-      <div onClick={click}>Click me</div>
+      <Button onClick={click} mt={3}>Click me</Button>
     </div>
   )
 }
