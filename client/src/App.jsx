@@ -2,12 +2,14 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import './App.css'
+import Navbar from './components/layout/Navbar'
 import Apartment from './pages/Apartment'
 
 function App() {
   return (
     <ChakraProvider>
       <HashRouter>
+        <Navbar />
         <Routes>
           <Route
             path="/apartment"
