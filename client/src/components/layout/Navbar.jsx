@@ -13,6 +13,7 @@ function Navbar() {
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/apartment">Apartment</Link>
+          <Link as={ReactLink} to="/addapartment">Add Apartment</Link>
           <Spacer />
           <Button>Connect Wallet</Button>
         </Flex>
