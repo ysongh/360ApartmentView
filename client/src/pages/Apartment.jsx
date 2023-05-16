@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from '@chakra-ui/react'
-import ReactPannellum, { getConfig } from "react-pannellum"
+import ReactPannellum, { getConfig, addHotSpot } from "react-pannellum"
 
 const imageURL1 = "https://www.shutterstock.com/shutterstock/photos/1175752585/display_1500/stock-photo--d-illustration-spherical-vr-degrees-a-seamless-panorama-of-the-room-and-room-of-light-1175752585.jpg"
 const imageURL2 = "https://www.shutterstock.com/shutterstock/photos/525626881/display_1500/stock-photo-hdri-panorama-view-in-modern-white-empty-loft-apartment-interior-of-living-room-hall-full-525626881.jpg"
@@ -31,8 +31,25 @@ function Apartment() {
     ]
   }
 
-  const click = () => {
+  const debug = () => {
     console.log(getConfig())
+    addHotSpot({
+      "pitch": 14.1,
+      "yaw": 1.5,
+      "type": "info",
+      "text": "Apartment 1",
+      "URL": imageURL1
+    }, "firstScene");
+  }
+
+  const addHotSpots = () => {
+    addHotSpot({
+      "pitch": 14.1,
+      "yaw": 1.5,
+      "type": "info",
+      "text": "Apartment 1",
+      "URL": imageURL1
+    }, "firstScene");
   }
 
   return (
@@ -43,7 +60,8 @@ function Apartment() {
         imageSource={image}
         config={config}
       />
-      <Button onClick={click} mt={3}>Click me</Button>
+      <Button onClick={debug} mt={3}>Check Config</Button>
+      <Button onClick={addHotSpots} mt={3}>Add HotSpot</Button>
     </div>
   )
 }
