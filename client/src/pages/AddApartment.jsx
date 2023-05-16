@@ -3,6 +3,7 @@ import { Container, Center, FormControl, FormLabel, Box, Heading, Image, Button 
 
 function AddApartment() {
   const [imageFile, setImageFile] = useState(null)
+  const [link, setLink] = useState("")
 
   const handleUpload = async (event) => {
     const image = event.target.files[0]
@@ -10,7 +11,16 @@ function AddApartment() {
   }
 
   const submitUpload = async () => {
-    console.log(imageFile)
+    const formData = new FormData()
+    formData.append('file', imageFile)
+
+    const response = await fetch('http://localhost:4000/api/apartment/upload', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await response.json()
+    console.log(data)
+    setLink(data?.protocolLink)
   }
 
   return (
@@ -26,6 +36,8 @@ function AddApartment() {
           {imageFile && <Image src={URL.createObjectURL(imageFile)} alt="Upload Image" /> }
 
           <Button mt="4" onClick={submitUpload}>Add</Button>
+
+          {link && <p>{link}</p>}
         </Box>
       </Center>
     </Container>
