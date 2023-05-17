@@ -23,6 +23,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3",
     "@tableland/evm": "^4.2.2",
+    "@tableland/local": "^1.2.3",
     "dotenv": "^16.0.3"
   }
 }
