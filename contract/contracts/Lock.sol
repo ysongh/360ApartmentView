@@ -1,34 +1,42 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+import "@tableland/evm/contracts/utils/TablelandDeployments.sol";
+import "@tableland/evm/contracts/utils/SQLHelpers.sol";
+import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-contract Lock {
-    uint public unlockTime;
-    address payable public owner;
+contract Lock is ERC721Holder {
+  uint256 public tableId;
+  string private constant _TABLE_PREFIX = "my_hardhat_table";
 
-    event Withdrawal(uint amount, uint when);
+ // Add a constructor that creates and inserts data
+  constructor() {
+    tableId = TablelandDeployments.get().create(
+      address(this),
+      SQLHelpers.toCreateFromSchema(
+        "id integer primary key," // Notice the trailing comma
+        "val text",
+        _TABLE_PREFIX
+      )
+    );
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
-    }
-
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
-
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
-
-        emit Withdrawal(address(this).balance, block.timestamp);
-
-        owner.transfer(address(this).balance);
-    }
+    TablelandDeployments.get().mutate(
+      address(this),
+      tableId,
+      SQLHelpers.toInsert(
+        _TABLE_PREFIX,
+        tableId,
+        "id,val",
+        string.concat(
+          Strings.toString(1), // Convert to a string
+          ",",
+          SQLHelpers.quote("Test Tables") // Wrap strings in single quotes with the `quote` method
+        )
+      )
+    );
+  }
 }
