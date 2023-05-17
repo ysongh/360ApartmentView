@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import './App.css'
 import Navbar from './components/layout/Navbar'
+import Home from './pages/Home'
 import Apartment from './pages/Apartment'
 import AddApartment from './pages/AddApartment'
 
@@ -23,7 +24,7 @@ function App() {
           <Route
             path="/"
             element={
-              <h1>Home</h1>} />
+              <Home />} />
         </Routes>
       </HashRouter>
     </ChakraProvider>
