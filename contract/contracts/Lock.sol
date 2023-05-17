@@ -12,6 +12,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract Lock is ERC721Holder {
   uint256 public tableId;
   string private constant _TABLE_PREFIX = "my_hardhat_table";
+  uint256 public dataCount = 1;
 
  // Add a constructor that creates and inserts data
   constructor() {
@@ -32,11 +33,40 @@ contract Lock is ERC721Holder {
         tableId,
         "id,val",
         string.concat(
-          Strings.toString(1), // Convert to a string
+          Strings.toString(dataCount), // Convert to a string
           ",",
           SQLHelpers.quote("Test Tables") // Wrap strings in single quotes with the `quote` method
         )
       )
     );
+
+    dataCount++;
   }
+
+    // Insert data into a table
+    function insert(string memory val) public payable {
+        /*  Under the hood, SQL helpers formulates:
+        *
+        *  INSERT INTO {prefix}_{chainId}_{tableId} (id,val) VALUES(
+        *    1
+        *    'msg.sender'
+        *  );
+        */
+        TablelandDeployments.get().mutate(
+            address(this),
+            tableId,
+            SQLHelpers.toInsert(
+            _TABLE_PREFIX,
+            tableId,
+            "id,val",
+            string.concat(
+                Strings.toString(dataCount), // Convert to a string
+                ",",
+                SQLHelpers.quote(val) // Wrap strings in single quotes
+              )
+            )
+        );
+
+        dataCount++;
+    }
 }
