@@ -14,7 +14,7 @@ contract Lock is ERC721Holder {
   string private constant _TABLE_PREFIX = "my_hardhat_table";
   uint256 public dataCount = 1;
 
- // Add a constructor that creates and inserts data
+  // Add a constructor that creates and inserts data
   constructor() {
     tableId = TablelandDeployments.get().create(
       address(this),
@@ -43,30 +43,34 @@ contract Lock is ERC721Holder {
     dataCount++;
   }
 
-    // Insert data into a table
-    function insert(string memory val) public payable {
-        /*  Under the hood, SQL helpers formulates:
-        *
-        *  INSERT INTO {prefix}_{chainId}_{tableId} (id,val) VALUES(
-        *    1
-        *    'msg.sender'
-        *  );
-        */
-        TablelandDeployments.get().mutate(
-            address(this),
-            tableId,
-            SQLHelpers.toInsert(
-            _TABLE_PREFIX,
-            tableId,
-            "id,val",
-            string.concat(
-                Strings.toString(dataCount), // Convert to a string
-                ",",
-                SQLHelpers.quote(val) // Wrap strings in single quotes
-              )
-            )
-        );
+  // Insert data into a table
+  function insert(string memory val) public payable {
+    /*  Under the hood, SQL helpers formulates:
+    *
+    *  INSERT INTO {prefix}_{chainId}_{tableId} (id,val) VALUES(
+    *    1
+    *    'msg.sender'
+    *  );
+    */
+    TablelandDeployments.get().mutate(
+        address(this),
+        tableId,
+        SQLHelpers.toInsert(
+        _TABLE_PREFIX,
+        tableId,
+        "id,val",
+        string.concat(
+            Strings.toString(dataCount), // Convert to a string
+            ",",
+            SQLHelpers.quote(val) // Wrap strings in single quotes
+          )
+        )
+    );
 
-        dataCount++;
-    }
+    dataCount++;
+  }
+
+  function getTableName() external view returns (string memory) {
+    return SQLHelpers.toNameFromId(_TABLE_PREFIX, tableId);
+  }
 }
