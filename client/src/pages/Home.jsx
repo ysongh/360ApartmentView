@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
-import { Database } from "@tableland/sdk"
 
-const db = new Database();
-const tableName = "my_hardhat_table_3141_41"
+import { getApartments } from "../Tableland";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -13,9 +11,8 @@ function Home() {
 
   const loadData = async () => {
     try {
-      const { results } = await db.prepare(`SELECT * FROM ${tableName};`).all()
-      console.log(results)
-      setData(results)
+      const apartments = await getApartments();
+      setData(apartments)
     } catch (error) {
       console.error(error)
     }
