@@ -27,7 +27,7 @@ function App() {
           <Route
             path="/addapartment"
             element={
-              <AddApartment />} />
+              <AddApartment contract360AF={contract360AF} />} />
           <Route
             path="/"
             element={

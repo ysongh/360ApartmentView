@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Center, FormControl, FormLabel, Box, Heading, Image, Button } from '@chakra-ui/react';
 
-function AddApartment() {
+function AddApartment({ contract360AF }) {
   const [imageFile, setImageFile] = useState(null)
   const [link, setLink] = useState("")
 
@@ -21,6 +21,9 @@ function AddApartment() {
     const data = await response.json()
     console.log(data)
     setLink(data?.protocolLink)
+    const transaction = await contract360AF.insert(data?.protocolLink);
+    const tx = await transaction.wait();
+    console.log(tx);
   }
 
   return (
