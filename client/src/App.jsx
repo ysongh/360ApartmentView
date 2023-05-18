@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 
@@ -8,10 +9,16 @@ import Apartment from './pages/Apartment'
 import AddApartment from './pages/AddApartment'
 
 function App() {
+  const [ethAddress, setETHAddress] = useState('')
+  const [contract360AF, setContract360AF] = useState(null)
+
   return (
     <ChakraProvider>
       <HashRouter>
-        <Navbar />
+        <Navbar
+          ethAddress={ethAddress}
+          setETHAddress={setETHAddress}
+          setContract360AF={setContract360AF} />
         <Routes>
           <Route
             path="/apartment"
