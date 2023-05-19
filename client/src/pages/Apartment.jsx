@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Button } from '@chakra-ui/react'
+import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import ReactPannellum, { getConfig, addHotSpot } from "react-pannellum"
 
 const imageURL = [
@@ -9,7 +9,9 @@ const imageURL = [
 ]
 
 function Apartment() {
-  const { id } = useParams();
+  const { id } = useParams()
+
+  const [message, setMessage] = useState("")
 
   const config = {
     type: 'equirectangular',
@@ -39,13 +41,16 @@ function Apartment() {
   }
 
   const addHotSpots = () => {
+    const config = getConfig()
+
     addHotSpot({
-      "pitch": 14.1,
-      "yaw": 1.5,
+      "pitch": config.pitch,
+      "yaw": config.yaw,
       "type": "info",
-      "text": "Apartment 1",
-      "URL": imageURL[1]
-    }, "firstScene");
+      "text": message
+    }, "firstScene")
+
+    setMessage("")
   }
 
   return (
@@ -57,6 +62,11 @@ function Apartment() {
         config={config}
       />
       <Button onClick={debug} mt={3}>Check Config</Button>
+      <br />
+      <FormControl mb='3'>
+        <FormLabel htmlFor='message'>Add Note</FormLabel>
+        <Input value={message} onChange={(e) => setMessage(e.target.value)} />
+      </FormControl>
       <Button onClick={addHotSpots} mt={3}>Add HotSpot</Button>
     </div>
   )
