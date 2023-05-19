@@ -12,6 +12,7 @@ function Apartment() {
   const { id } = useParams()
 
   const [message, setMessage] = useState("")
+  const [url, setURL] = useState("")
 
   const config = {
     type: 'equirectangular',
@@ -54,6 +55,21 @@ function Apartment() {
     setMessage("")
   }
 
+  const addScene = () => {
+    const config = getConfig()
+
+    addHotSpot({
+      "pitch": config.pitch,
+      "yaw": config.yaw,
+      "type": "scene",
+      "text": message,
+      "URL": url
+    }, "firstScene")
+
+    setMessage("")
+    setURL("")
+  }
+
   return (
     <div>
       <ReactPannellum
@@ -68,7 +84,12 @@ function Apartment() {
         <FormLabel htmlFor='message'>Add Note</FormLabel>
         <Input value={message} onChange={(e) => setMessage(e.target.value)} />
       </FormControl>
+      <FormControl mb='3'>
+        <FormLabel htmlFor='url'>Add Scene</FormLabel>
+        <Input value={url} onChange={(e) => setURL(e.target.value)} />
+      </FormControl>
       <Button onClick={addNote} mt={3}>Add Note</Button>
+      <Button onClick={addScene} mt={3}>Add Scene</Button>
     </div>
   )
 }
