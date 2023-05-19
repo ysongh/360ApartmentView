@@ -20,7 +20,8 @@ contract Lock is ERC721Holder {
       address(this),
       SQLHelpers.toCreateFromSchema(
         "id integer primary key," // Notice the trailing comma
-        "val text",
+        "urls text,"
+        "number_of_rooms text",
         _TABLE_PREFIX
       )
     );
@@ -31,11 +32,13 @@ contract Lock is ERC721Holder {
       SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,val",
+        "id,urls,number_of_rooms",
         string.concat(
           Strings.toString(dataCount), // Convert to a string
           ",",
-          SQLHelpers.quote("Test Tables") // Wrap strings in single quotes with the `quote` method
+          SQLHelpers.quote("Test Apartment"), // Wrap strings in single quotes with the `quote` method
+          ",",
+          SQLHelpers.quote("4")
         )
       )
     );
@@ -44,7 +47,7 @@ contract Lock is ERC721Holder {
   }
 
   // Insert data into a table
-  function insert(string memory val) public payable {
+  function insert(string memory url, string memory numberOfRooms) public payable {
     /*  Under the hood, SQL helpers formulates:
     *
     *  INSERT INTO {prefix}_{chainId}_{tableId} (id,val) VALUES(
@@ -58,11 +61,13 @@ contract Lock is ERC721Holder {
         SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,val",
+        "id,urls,number_of_rooms",
         string.concat(
             Strings.toString(dataCount), // Convert to a string
             ",",
-            SQLHelpers.quote(val) // Wrap strings in single quotes
+            SQLHelpers.quote(url), // Wrap strings in single quotes
+             ",",
+            SQLHelpers.quote(numberOfRooms)
           )
         )
     );
