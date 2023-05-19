@@ -16,6 +16,7 @@ function Apartment() {
   const config = {
     type: 'equirectangular',
     autoLoad: true,
+    hotSpotDebug: true,
     hotSpots: [
       {
         id: "1",
@@ -40,7 +41,7 @@ function Apartment() {
     console.log(getConfig())
   }
 
-  const addHotSpots = () => {
+  const addNote = () => {
     const config = getConfig()
 
     addHotSpot({
@@ -67,7 +68,7 @@ function Apartment() {
         <FormLabel htmlFor='message'>Add Note</FormLabel>
         <Input value={message} onChange={(e) => setMessage(e.target.value)} />
       </FormControl>
-      <Button onClick={addHotSpots} mt={3}>Add HotSpot</Button>
+      <Button onClick={addNote} mt={3}>Add Note</Button>
     </div>
   )
 }

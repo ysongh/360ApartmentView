@@ -30,7 +30,7 @@ function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
             <Link as={ReactLink} to="/">
-              <Heading color="green" mt="3" mb="5">360 ApartmentView</Heading>
+              <Heading color="green" mt="3" mb="5">360 APT</Heading>
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
