@@ -21,7 +21,7 @@ function App() {
           setContract360AF={setContract360AF} />
         <Routes>
           <Route
-            path="/apartment"
+            path="/apartment/:id"
             element={
               <Apartment />} />
           <Route
