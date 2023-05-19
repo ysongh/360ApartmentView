@@ -4,8 +4,8 @@ import { Tabs, Tab, TabPanels, TabPanel, TabList, FormControl, FormLabel, Input,
 import ReactPannellum, { getConfig, addHotSpot } from "react-pannellum"
 
 const imageURL = [
-  "https://www.shutterstock.com/shutterstock/photos/1175752585/display_1500/stock-photo--d-illustration-spherical-vr-degrees-a-seamless-panorama-of-the-room-and-room-of-light-1175752585.jpg",
-  "https://www.shutterstock.com/shutterstock/photos/525626881/display_1500/stock-photo-hdri-panorama-view-in-modern-white-empty-loft-apartment-interior-of-living-room-hall-full-525626881.jpg"
+  "https://bafybeielq2n7yrh5f2lq3cx6hl6zbngkqywa5gcqeeaqemvkes3brdpw6q.ipfs.sphn.link/62d946685ac9e15c53f0fbe7f225bfa4",
+  "https://bafybeihyxahae5j33kcoz7p5vbqjjnupvi6iwqutzeivkwwc6zbhjizeeu.ipfs.sphn.link/a9cba9b27d1984f84f404496eeef0511"
 ]
 
 function Apartment() {
@@ -22,16 +22,16 @@ function Apartment() {
       {
         id: "1",
         type: 'scene',
-        pitch: 10,
-        yaw: 20,
+        pitch: -4.361933232111555,
+        yaw: -13.1497537594223,
         text: 'Go to apartment 1',
         URL: `${window.location.origin}/#/apartment/${0}`,
       },
       {
         id: "2",
         type: 'scene',
-        pitch: -10,
-        yaw: 30,
+        pitch: -7.325211339069794,
+        yaw: -85.64928290805499,
         text: 'Go to apartment 2',
         URL: `${window.location.origin}/#/apartment/${1}`,
       }
