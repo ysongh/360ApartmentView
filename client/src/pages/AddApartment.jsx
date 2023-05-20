@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Center, FormControl, FormLabel, Box, Heading, Tabs, Tab, TabPanels, TabPanel, TabList, Input, Button } from '@chakra-ui/react';
+import { Container, Center, FormControl, FormLabel, Box, Heading, Tabs, Tab, TabPanels, TabPanel, TabList, Link, Input, Button } from '@chakra-ui/react';
 import { getConfig, addHotSpot } from "react-pannellum"
 
 import Image360 from '../components/Image360';
@@ -7,7 +7,10 @@ import Image360 from '../components/Image360';
 function AddApartment({ contract360AF }) {
   const [imageFile, setImageFile] = useState(null)
   const [link, setLink] = useState("")
+  const [link2, setLink2] = useState("")
   const [numberOfRooms, setNumberOfRooms] = useState("")
+  const [notes, setNotes] = useState([])
+  const [scenes, setScenes] = useState([])
 
   const [message, setMessage] = useState("")
   const [url, setURL] = useState("")
@@ -18,19 +21,42 @@ function AddApartment({ contract360AF }) {
   }
 
   const submitUpload = async () => {
+    const apartmentURL = await uploadToSpheronStorage(imageFile)
+    setLink(apartmentURL)
+
+    const hotSpotData = JSON.stringify({ 
+      notes,
+      scenes
+     });
+
+    const prepareToUpload = new File(
+      [JSON.stringify(
+        {
+          hotSpotData
+        },
+        null,
+        1
+      )], 'metadata.json');
+
+    const hotspotURL = await uploadToSpheronStorage(prepareToUpload)
+    setLink2(hotspotURL)
+
+    const transaction = await contract360AF.insert(fullURL, numberOfRooms)
+    const tx = await transaction.wait()
+    console.log(tx)
+  }
+
+
+  const uploadToSpheronStorage = async (newFile) => {
     const formData = new FormData()
-    formData.append('file', imageFile)
+    formData.append('file', newFile)
 
     const response = await fetch('http://localhost:4000/api/apartment/upload', {
       method: 'POST',
       body: formData,
     });
     const data = await response.json()
-    const fullURL = `${data?.protocolLink}/${data?.fileName}`
-    setLink(fullURL)
-    const transaction = await contract360AF.insert(fullURL, numberOfRooms);
-    const tx = await transaction.wait();
-    console.log(tx);
+    return `${data?.protocolLink}/${data?.fileName}`
   }
 
   const debug = () => {
@@ -40,12 +66,15 @@ function AddApartment({ contract360AF }) {
   const addNote = () => {
     const config = getConfig()
 
-    addHotSpot({
+    const newNote = {
       "pitch": config.pitch,
       "yaw": config.yaw,
       "type": "info",
       "text": message
-    }, "firstScene")
+    }
+
+    addHotSpot(newNote, "firstScene")
+    setNotes([...notes, newNote])
 
     setMessage("")
   }
@@ -120,9 +149,16 @@ function AddApartment({ contract360AF }) {
             <Input value={numberOfRooms} onChange={(e) => setNumberOfRooms(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" onClick={submitUpload}>Add</Button>
-
-          {link && <p>{link}</p>}
+          <Button mt="4" mb="3" onClick={submitUpload}>Add</Button>
+          <br />
+          {link && <Link href={link} target="_blank" rel="noopener noreferrer">
+            Apt URL
+          </Link>}
+          <br />
+          {link2 &&  <Link href={link2} target="_blank" rel="noopener noreferrer">
+            Data URL
+          </Link>}
+         
         </Box>
       </Center>
     </Container>
