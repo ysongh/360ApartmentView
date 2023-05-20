@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Tabs, Tab, TabPanels, TabPanel, TabList, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
-import ReactPannellum, { getConfig, addHotSpot } from "react-pannellum"
+import { getConfig, addHotSpot } from "react-pannellum"
+
+import Image360 from '../components/Image360'
 
 const imageURL = [
   "https://bafybeielq2n7yrh5f2lq3cx6hl6zbngkqywa5gcqeeaqemvkes3brdpw6q.ipfs.sphn.link/62d946685ac9e15c53f0fbe7f225bfa4",
@@ -13,30 +15,6 @@ function Apartment() {
 
   const [message, setMessage] = useState("")
   const [url, setURL] = useState("")
-
-  const config = {
-    type: 'equirectangular',
-    autoLoad: true,
-    hotSpotDebug: true,
-    hotSpots: [
-      {
-        id: "1",
-        type: 'scene',
-        pitch: -4.361933232111555,
-        yaw: -13.1497537594223,
-        text: 'Go to apartment 1',
-        URL: `${window.location.origin}/#/apartment/${0}`,
-      },
-      {
-        id: "2",
-        type: 'scene',
-        pitch: -7.325211339069794,
-        yaw: -85.64928290805499,
-        text: 'Go to apartment 2',
-        URL: `${window.location.origin}/#/apartment/${1}`,
-      }
-    ]
-  }
 
   const debug = () => {
     console.log(getConfig())
@@ -72,12 +50,7 @@ function Apartment() {
 
   return (
     <div>
-      <ReactPannellum
-        id="1"
-        sceneId="firstScene"
-        imageSource={imageURL[id]}
-        config={config}
-      />
+      <Image360 currentImage={imageURL[id]} />
       <Tabs isFitted variant='enclosed'>
         <TabList mb='1em'>
           <Tab>Add Note</Tab>
