@@ -20,9 +20,9 @@ function AddApartment({ contract360AF }) {
       body: formData,
     });
     const data = await response.json()
-    console.log(data)
-    setLink(data?.protocolLink)
-    const transaction = await contract360AF.insert(data?.protocolLink, numberOfRooms);
+    const fullURL = `${data?.protocolLink}/${data?.fileName}`
+    setLink(fullURL)
+    const transaction = await contract360AF.insert(fullURL, numberOfRooms);
     const tx = await transaction.wait();
     console.log(tx);
   }

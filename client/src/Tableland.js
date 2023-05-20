@@ -10,6 +10,6 @@ export const getApartments = async () => {
     return results
   } catch (error) {
     console.error(error)
-    return null
+    return []
   }
 }

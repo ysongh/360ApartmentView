@@ -16,7 +16,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     filePath,
     {
       protocol: ProtocolEnum.IPFS,
-      name: "test",
+      name: req.file.originalname,
       onUploadInitiated: (uploadId) => {
         console.log(`Upload with id ${uploadId} started...`);
       },
@@ -28,7 +28,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
   );
 
   res.send({
-    uploadId, bucketId, protocolLink, dynamicLinks
+    uploadId, bucketId, protocolLink, dynamicLinks, fileName: req.file.filename
   });
 })
 
