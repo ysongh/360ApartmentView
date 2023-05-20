@@ -7,10 +7,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy();
-  await lock.deployed();
-  console.log(`Lock deployed to ${lock.address}`);
+  const Apartment360 = await hre.ethers.getContractFactory("Apartment360");
+  const apartment360 = await Apartment360.deploy();
+  await apartment360.deployed();
+  console.log(`Apartment360 deployed to ${apartment360.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

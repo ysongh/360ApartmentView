@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-contract Lock is ERC721Holder {
+contract Apartment360 is ERC721Holder {
   uint256 public tableId;
   string private constant _TABLE_PREFIX = "my_hardhat_table";
   uint256 public dataCount = 1;
