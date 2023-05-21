@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container, Center, FormControl, FormLabel, Box, Heading, Tabs, Tab, TabPanels, TabPanel, TabList, Link, Input, Button } from '@chakra-ui/react';
 import { getConfig, addHotSpot } from "react-pannellum"
 
-import Image360 from '../components/Image360';
+import Image360 from '../components/Image360'
 
 function AddApartment({ contract360AF }) {
   const [imageFile, setImageFile] = useState(null)
@@ -11,6 +11,7 @@ function AddApartment({ contract360AF }) {
   const [numberOfRooms, setNumberOfRooms] = useState("")
   const [notes, setNotes] = useState([])
   const [scenes, setScenes] = useState([])
+  const [loading, setLoading] = useState("")
 
   const [message, setMessage] = useState("")
   const [url, setURL] = useState("")
@@ -21,29 +22,38 @@ function AddApartment({ contract360AF }) {
   }
 
   const submitUpload = async () => {
-    const apartmentURL = await uploadToSpheronStorage(imageFile)
-    setLink(apartmentURL)
+    try {
+      setLoading(true)
 
-    const hotSpotData = JSON.stringify({ 
-      notes,
-      scenes
-     });
+      const apartmentURL = await uploadToSpheronStorage(imageFile)
+      setLink(apartmentURL)
 
-    const prepareToUpload = new File(
-      [JSON.stringify(
-        {
-          hotSpotData
-        },
-        null,
-        1
-      )], 'metadata.json');
+      const hotSpotData = JSON.stringify({ 
+        notes,
+        scenes
+      });
 
-    const hotspotURL = await uploadToSpheronStorage(prepareToUpload)
-    setLink2(hotspotURL)
+      const prepareToUpload = new File(
+        [JSON.stringify(
+          {
+            hotSpotData
+          },
+          null,
+          1
+        )], 'metadata.json');
 
-    const transaction = await contract360AF.addApt(apartmentURL, hotspotURL, numberOfRooms)
-    const tx = await transaction.wait()
-    console.log(tx)
+      const hotspotURL = await uploadToSpheronStorage(prepareToUpload)
+      setLink2(hotspotURL)
+
+      const transaction = await contract360AF.addApt(apartmentURL, hotspotURL, numberOfRooms)
+      const tx = await transaction.wait()
+      console.log(tx)
+      setLoading(false)
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+    
   }
 
 
@@ -151,7 +161,9 @@ function AddApartment({ contract360AF }) {
             <Input value={numberOfRooms} onChange={(e) => setNumberOfRooms(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" mb="3" onClick={submitUpload}>Add</Button>
+          <Button mt="4" mb="3" onClick={submitUpload} isLoading={loading} loadingText='Submitting'>
+            Add
+          </Button>
           <br />
           {link && <Link href={link} target="_blank" rel="noopener noreferrer">
             Apt URL
