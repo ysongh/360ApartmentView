@@ -20,53 +20,50 @@ contract Apartment360 is ERC721Holder {
       address(this),
       SQLHelpers.toCreateFromSchema(
         "id integer primary key," // Notice the trailing comma
-        "urls text,"
+        "apt_url text,"
+        "data_url text,"
         "number_of_rooms text",
         _TABLE_PREFIX
       )
     );
 
     TablelandDeployments.get().mutate(
-      address(this),
-      tableId,
-      SQLHelpers.toInsert(
+        address(this),
+        tableId,
+        SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,urls,number_of_rooms",
+        "id,apt_url,data_url,number_of_rooms",
         string.concat(
-          Strings.toString(dataCount), // Convert to a string
-          ",",
-          SQLHelpers.quote("Test Apartment"), // Wrap strings in single quotes with the `quote` method
-          ",",
-          SQLHelpers.quote("4")
+            Strings.toString(dataCount), // Convert to a string
+            ",",
+            SQLHelpers.quote("aptURL"), // Wrap strings in single quotes
+            ",",
+            SQLHelpers.quote("dataURL"),
+            ",",
+            SQLHelpers.quote("numberOfRooms")
+          )
         )
-      )
     );
 
     dataCount++;
   }
 
-  // Insert data into a table
-  function insert(string memory url, string memory numberOfRooms) public payable {
-    /*  Under the hood, SQL helpers formulates:
-    *
-    *  INSERT INTO {prefix}_{chainId}_{tableId} (id,val) VALUES(
-    *    1
-    *    'msg.sender'
-    *  );
-    */
+  function addApt(string memory aptURL, string memory dataURL, string memory numberOfRooms) public payable {
     TablelandDeployments.get().mutate(
         address(this),
         tableId,
         SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,urls,number_of_rooms",
+        "id,apt_url,data_url,number_of_rooms",
         string.concat(
             Strings.toString(dataCount), // Convert to a string
             ",",
-            SQLHelpers.quote(url), // Wrap strings in single quotes
-             ",",
+            SQLHelpers.quote(aptURL), // Wrap strings in single quotes
+            ",",
+            SQLHelpers.quote(dataURL),
+            ",",
             SQLHelpers.quote(numberOfRooms)
           )
         )

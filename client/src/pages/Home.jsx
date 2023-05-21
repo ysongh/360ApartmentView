@@ -22,7 +22,7 @@ function Home() {
     <div>
       <h1>Home</h1>
       {data.map(d => (
-        <p key={d.id}>{d.urls} {d.number_of_rooms}</p>
+        <p key={d.id}>{d.apt_url}, {d.data_url}, {d.number_of_rooms}</p>
       ))}
     </div>
   )

@@ -2,7 +2,7 @@ import { Link as ReactLink } from 'react-router-dom'
 import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 
-import ApartmentFinder from '../../artifacts/contracts/Lock.sol/Lock.json'
+import ApartmentFinder from '../../artifacts/contracts/Apartment360.sol/Apartment360.json'
 
 const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 

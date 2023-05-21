@@ -41,7 +41,7 @@ function AddApartment({ contract360AF }) {
     const hotspotURL = await uploadToSpheronStorage(prepareToUpload)
     setLink2(hotspotURL)
 
-    const transaction = await contract360AF.insert(fullURL, numberOfRooms)
+    const transaction = await contract360AF.addApt(apartmentURL, hotspotURL, numberOfRooms)
     const tx = await transaction.wait()
     console.log(tx)
   }
@@ -82,13 +82,15 @@ function AddApartment({ contract360AF }) {
   const addScene = () => {
     const config = getConfig()
 
-    addHotSpot({
+    const newScene = {
       "pitch": config.pitch,
       "yaw": config.yaw,
       "type": "scene",
       "text": message,
       "URL": url
-    }, "firstScene")
+    }
+    addHotSpot(newScene, "firstScene")
+    setScenes([...scenes, newScene])
 
     setMessage("")
     setURL("")
