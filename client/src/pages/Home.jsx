@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { getApartments, getApartmentByID } from "../Tableland";
+import { getApartments, } from "../Tableland";
 
 function Home() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -17,21 +20,12 @@ function Home() {
       console.error(error)
     }
   }
-
-  const getApartment = async (id) => {
-    try {
-      await getApartmentByID(id);
-      
-    } catch (error) {
-      console.error(error)
-    }
-  }
   
   return (
     <div>
       <h1>Home</h1>
       {data.map(d => (
-        <p key={d.id} onClick={() => getApartment(d.id)}>
+        <p key={d.id} onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
           {d.id} - {d.apt_url}, {d.data_url}, {d.number_of_rooms}
         </p>
       ))}

@@ -7,6 +7,7 @@ import Navbar from './components/layout/Navbar'
 import Home from './pages/Home'
 import Apartment from './pages/Apartment'
 import AddApartment from './pages/AddApartment'
+import ApartmentDetail from './pages/ApartmentDetail'
 
 function App() {
   const [ethAddress, setETHAddress] = useState('')
@@ -24,6 +25,10 @@ function App() {
             path="/apartment/:id"
             element={
               <Apartment />} />
+          <Route
+            path="/apartmentdetail/:id"
+            element={
+              <ApartmentDetail />} />
           <Route
             path="/addapartment"
             element={
