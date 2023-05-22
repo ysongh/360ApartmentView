@@ -6,6 +6,7 @@ function Image360({ currentImage }) {
     type: 'equirectangular',
     autoLoad: true,
     hotSpotDebug: true,
+    mouseZoom: false,
   }
 
   return (
