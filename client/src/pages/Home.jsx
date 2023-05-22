@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Container, SimpleGrid, Heading, Card, CardBody, CardFooter, Image, Button, Text } from '@chakra-ui/react'
 
 import { getApartments, } from "../Tableland";
 
@@ -22,14 +23,25 @@ function Home() {
   }
   
   return (
-    <div>
-      <h1>Home</h1>
-      {data.map(d => (
-        <p key={d.id} onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
-          {d.id} - {d.apt_url}, {d.data_url}, {d.number_of_rooms}
-        </p>
-      ))}
-    </div>
+    <Container maxW='1100px' mt='3'>
+      <Heading mb='2'>Apartments</Heading>
+      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
+        {data.map(d => (
+            <Card key={d.id} >
+            <CardBody>
+              <Image src={d.apt_url} alt="Product" w='full' />
+              <Heading fontSize='lg' mt='3'>Test</Heading>
+            </CardBody>
+            <CardFooter>
+              <Button mr='2'  onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
+                View 
+              </Button>
+              <Text fontSize='lg' mt='1'>{d.number_of_rooms} Rooms</Text>
+            </CardFooter>
+          </Card>
+        ))}
+      </SimpleGrid>
+    </Container>
   )
 }
 
