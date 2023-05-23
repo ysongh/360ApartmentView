@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 
 import ApartmentFinder from '../../artifacts/contracts/Apartment360.sol/Apartment360.json'
 
-const CONTRACT_ADDRESS = "0x4Bd67e27F0E6cE7d6b02a1544db5D075528aB78b";
+const CONTRACT_ADDRESS = "0xEA4d06C809B789aD4Ce397B5995b3f7039a9b228";
 
 function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
   const connectMetamask = async () => {

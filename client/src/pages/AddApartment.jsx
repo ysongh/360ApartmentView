@@ -9,6 +9,8 @@ function AddApartment({ contract360AF }) {
   const [link, setLink] = useState("")
   const [link2, setLink2] = useState("")
   const [numberOfRooms, setNumberOfRooms] = useState("")
+  const [location, setLocation] = useState("")
+  const [price, setPrice] = useState("")
   const [notes, setNotes] = useState([])
   const [scenes, setScenes] = useState([])
   const [loading, setLoading] = useState("")
@@ -45,7 +47,7 @@ function AddApartment({ contract360AF }) {
       const hotspotURL = await uploadToSpheronStorage(prepareToUpload)
       setLink2(hotspotURL)
 
-      const transaction = await contract360AF.addApt(apartmentURL, hotspotURL, numberOfRooms)
+      const transaction = await contract360AF.addApt(apartmentURL, hotspotURL, numberOfRooms, location, price)
       const tx = await transaction.wait()
       console.log(tx)
       setLoading(false)
@@ -159,6 +161,16 @@ function AddApartment({ contract360AF }) {
           <FormControl mb='3'>
             <FormLabel htmlFor='numberOfRooms'>Number Of Rooms</FormLabel>
             <Input value={numberOfRooms} onChange={(e) => setNumberOfRooms(e.target.value)} />
+          </FormControl>
+
+          <FormControl mb='3'>
+            <FormLabel htmlFor='location'>Location</FormLabel>
+            <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+          </FormControl>
+
+          <FormControl mb='3'>
+            <FormLabel htmlFor='price'>Rent Price per Month</FormLabel>
+            <Input value={price} onChange={(e) => setPrice(e.target.value)} />
           </FormControl>
 
           <Button mt="4" mb="3" onClick={submitUpload} isLoading={loading} loadingText='Submitting'>

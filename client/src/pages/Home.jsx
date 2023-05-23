@@ -30,13 +30,13 @@ function Home() {
             <Card key={d.id} >
             <CardBody>
               <Image src={d.apt_url} alt="Product" w='full' />
-              <Heading fontSize='lg' mt='3'>Test</Heading>
+              <Heading fontSize='lg' mt='3'>{d.location}, {d.number_of_rooms} Rooms</Heading>
             </CardBody>
             <CardFooter>
               <Button mr='2'  onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
                 View 
               </Button>
-              <Text fontSize='lg' mt='1'>{d.number_of_rooms} Rooms</Text>
+              <Text fontSize='lg' mt='1'>${d.price} per month</Text>
             </CardFooter>
           </Card>
         ))}
