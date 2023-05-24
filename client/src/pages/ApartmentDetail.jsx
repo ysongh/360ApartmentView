@@ -1,6 +1,6 @@
 import React, { useEffect ,useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Container, Center, Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { addHotSpot } from "react-pannellum"
 
 import { getApartmentByID } from "../Tableland"
@@ -40,16 +40,19 @@ function ApartmentDetail() {
   }
 
   return (
-    <div>
-      {imageURL && <Image360 currentImage={imageURL} /> }
-      
-      <Flex justifyContent="space-between" alignItems="center">
-        <Heading fontSize="3xl">{apartment.location}</Heading>
-        <Text textAlign="left" fontSize="xl">${apartment.price} / month</Text>
-      </Flex>
-      <Text textAlign="left" fontSize="xl">{apartment.number_of_rooms} rooms</Text>
-      
-    </div>
+    <Container maxW='1200px'>
+      <Center>
+        <Box minWidth='650px'>
+          {imageURL && <Image360 currentImage={imageURL} /> }
+          
+          <Flex justifyContent="space-between" alignItems="center">
+            <Heading fontSize="3xl">{apartment.location}</Heading>
+            <Text textAlign="left" fontSize="xl">${apartment.price} / month</Text>
+          </Flex>
+          <Text textAlign="left" fontSize="xl">{apartment.number_of_rooms} rooms</Text>
+        </Box>
+      </Center>
+    </Container>
   )
 }
 

@@ -25,7 +25,7 @@ function Home() {
   return (
     <Container maxW='1100px' mt='3'>
       <Heading mb='2'>Apartments</Heading>
-      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
+      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))'>
         {data.map(d => (
             <Card key={d.id} >
             <CardBody>
