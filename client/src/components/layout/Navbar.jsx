@@ -38,7 +38,6 @@ function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
-          <Link as={ReactLink} to="/apartment/0">Apartment</Link>
           <Link as={ReactLink} to="/addapartment">Add Apartment</Link>
           <Spacer />
           {chainName && <p><Badge bgColor="green.300" fontSize='.9rem'>{chainName}</Badge></p>}

@@ -5,7 +5,6 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/layout/Navbar'
 import Home from './pages/Home'
-import Apartment from './pages/Apartment'
 import AddApartment from './pages/AddApartment'
 import ApartmentDetail from './pages/ApartmentDetail'
 
@@ -21,10 +20,6 @@ function App() {
           setETHAddress={setETHAddress}
           setContract360AF={setContract360AF} />
         <Routes>
-          <Route
-            path="/apartment/:id"
-            element={
-              <Apartment />} />
           <Route
             path="/apartmentdetail/:id"
             element={
