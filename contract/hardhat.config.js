@@ -12,10 +12,15 @@ module.exports = {
     verbose: false,
   },
 
-  // npx hardhat run scripts/deploy.js --network filecoin-hyperspace
   networks: {
+    // npx hardhat run scripts/deploy.js --network filecoin-hyperspace
     "filecoin-hyperspace": {
       url: "https://rpc.ankr.com/filecoin_testnet",
+      accounts: [process.env.PRIVATEKEY],
+    },
+    // npx hardhat run scripts/deploy.js --network mumbai
+    "mumbai": {
+      url: "https://rpc-mumbai.maticvigil.com/",
       accounts: [process.env.PRIVATEKEY],
     },
   },
