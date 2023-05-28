@@ -121,8 +121,7 @@ function AddApartment({ contract360AF }) {
 
           {imageFile && <Image360 currentImage={URL.createObjectURL(imageFile)} /> }
 
-
-          <Tabs isFitted variant='enclosed'>
+          {imageFile && <Tabs isFitted variant='enclosed'>
             <TabList mb='1em'>
               <Tab>Add Note</Tab>
               <Tab>Add Scene</Tab>
@@ -156,7 +155,7 @@ function AddApartment({ contract360AF }) {
               </TabPanel>
               
             </TabPanels>
-          </Tabs>
+          </Tabs> }
 
           <FormControl mb='3'>
             <FormLabel htmlFor='numberOfRooms'>Number Of Rooms</FormLabel>
