@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 
 import ApartmentFinder from '../../artifacts/contracts/Apartment360.sol/Apartment360.json'
 
-const CONTRACT_ADDRESS = "0xEA4d06C809B789aD4Ce397B5995b3f7039a9b228";
+const CONTRACT_ADDRESS = "0xEA4d06C809B789aD4Ce397B5995b3f7039a9b228"
 
 function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
   const [chainName, setChainName] = useState('');
@@ -29,7 +29,7 @@ function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
   }
 
   return (
-    <Box p={2}>
+    <Box p={2} bg="yellow.400">
       <Container maxW='1200px'>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
