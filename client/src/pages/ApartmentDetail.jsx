@@ -43,13 +43,16 @@ function ApartmentDetail() {
     <Container maxW='1200px'>
       <Center>
         <Box minWidth='650px'>
-          {imageURL && <Image360 currentImage={imageURL} /> }
-          
-          <Flex justifyContent="space-between" alignItems="center">
+          <Flex justifyContent="space-between" alignItems="center" mt="3" mb="4">
             <Heading fontSize="3xl">{apartment.location}</Heading>
             <Text textAlign="left" fontSize="xl">${apartment.price} / month</Text>
           </Flex>
-          <Text textAlign="left" fontSize="xl">{apartment.number_of_rooms} rooms</Text>
+
+          {imageURL && <Image360 currentImage={imageURL} /> }
+
+          <Text textAlign="left" fontSize="xl" mt="4">
+            {apartment.number_of_rooms} rooms
+          </Text>
         </Box>
       </Center>
     </Container>
