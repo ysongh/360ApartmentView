@@ -25,7 +25,7 @@ contract Apartment360 is ERC721Holder {
         "number_of_rooms text,"
         "location text,"
         "price text,"
-        "isShow integer",
+        "is_show integer",
         _TABLE_PREFIX
       )
     );
@@ -38,7 +38,7 @@ contract Apartment360 is ERC721Holder {
         SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,apt_url,data_url,number_of_rooms,location,price,isShow",
+        "id,apt_url,data_url,number_of_rooms,location,price,is_show",
         string.concat(
             Strings.toString(dataCount), // Convert to a string
             ",",
@@ -58,6 +58,34 @@ contract Apartment360 is ERC721Holder {
     );
 
     dataCount++;
+  }
+
+  // Update data in the table
+  function setNoShow(uint256 id) public payable {
+    // Set values to update, like the "val" column to the function input param
+    string memory setters = string.concat(
+      "is_show=",
+      SQLHelpers.quote(Strings.toString(0)) // Wrap strings in single quotes
+    );
+    // Only update the row with the matching `id`
+    string memory filters = string.concat(
+      "id=",
+      Strings.toString(id)
+    );
+    /*  Under the hood, SQL helpers formulates:
+    *
+    *  UPDATE {prefix}_{chainId}_{tableId} SET val=<myVal> WHERE id=<id>
+    */
+    TablelandDeployments.get().mutate(
+      address(this),
+      tableId,
+      SQLHelpers.toUpdate(
+        _TABLE_PREFIX,
+        tableId,
+        setters,
+        filters
+      )
+    );
   }
 
   function getTableName() external view returns (string memory) {
