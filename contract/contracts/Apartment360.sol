@@ -22,16 +22,16 @@ contract Apartment360 is ERC721Holder {
         "id integer primary key," // Notice the trailing comma
         "apt_url text,"
         "data_url text,"
-        "number_of_rooms text,"
+        "number_of_rooms integer,"
         "location text,"
-        "price text,"
+        "price integer,"
         "is_show integer",
         _TABLE_PREFIX
       )
     );
   }
 
-  function addApt(string memory aptURL, string memory dataURL, string memory numberOfRooms, string memory location, string memory price) public payable {
+  function addApt(string memory aptURL, string memory dataURL, uint256 numberOfRooms, string memory location, uint256 price) public payable {
     TablelandDeployments.get().mutate(
         address(this),
         tableId,
@@ -46,11 +46,11 @@ contract Apartment360 is ERC721Holder {
             ",",
             SQLHelpers.quote(dataURL),
             ",",
-            SQLHelpers.quote(numberOfRooms),
+            SQLHelpers.quote(Strings.toString(numberOfRooms)),
             ",",
             SQLHelpers.quote(location),
             ",",
-            SQLHelpers.quote(price),
+            SQLHelpers.quote(Strings.toString(price)),
             ",",
             SQLHelpers.quote(Strings.toString(1))
           )
