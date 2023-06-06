@@ -64,7 +64,7 @@ contract Apartment360 is ERC721Holder {
   }
 
   // Update data in the table
-  function setNoShow(uint256 id) public payable {
+  function setNoShow() public payable {
     // Set values to update, like the "val" column to the function input param
     string memory setters = string.concat(
       "is_show=",
@@ -72,8 +72,8 @@ contract Apartment360 is ERC721Holder {
     );
     // Only update the row with the matching `id`
     string memory filters = string.concat(
-      "id=",
-      Strings.toString(id)
+      "expire_date<",
+      SQLHelpers.quote(Strings.toString(block.timestamp))
     );
     /*  Under the hood, SQL helpers formulates:
     *
