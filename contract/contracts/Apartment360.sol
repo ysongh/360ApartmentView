@@ -25,7 +25,8 @@ contract Apartment360 is ERC721Holder {
         "number_of_rooms integer,"
         "location text,"
         "price integer,"
-        "is_show integer",
+        "is_show integer,"
+        "expire_date integer",
         _TABLE_PREFIX
       )
     );
@@ -38,7 +39,7 @@ contract Apartment360 is ERC721Holder {
         SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,apt_url,data_url,number_of_rooms,location,price,is_show",
+        "id,apt_url,data_url,number_of_rooms,location,price,is_show,expire_date",
         string.concat(
             Strings.toString(dataCount), // Convert to a string
             ",",
@@ -52,7 +53,9 @@ contract Apartment360 is ERC721Holder {
             ",",
             SQLHelpers.quote(Strings.toString(price)),
             ",",
-            SQLHelpers.quote(Strings.toString(1))
+            SQLHelpers.quote(Strings.toString(1)),
+            ",",
+            SQLHelpers.quote(Strings.toString(block.timestamp + 1 days))
           )
         )
     );
