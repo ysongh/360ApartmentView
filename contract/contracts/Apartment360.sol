@@ -91,6 +91,28 @@ contract Apartment360 is ERC721Holder {
     );
   }
 
+  function renewListing(uint256 id) public payable {
+    string memory setters = string.concat(
+      "expire_date=",
+      SQLHelpers.quote(Strings.toString(block.timestamp + 1 days))
+    );
+    string memory filters = string.concat(
+      "id=",
+      Strings.toString(id)
+    );
+    TablelandDeployments.get().mutate(
+      address(this),
+      tableId,
+      SQLHelpers.toUpdate(
+        _TABLE_PREFIX,
+        tableId,
+        setters,
+        filters
+      )
+    );
+  }
+
+
   function getTableName() external view returns (string memory) {
     return SQLHelpers.toNameFromId(_TABLE_PREFIX, tableId);
   }
