@@ -1,12 +1,12 @@
 import React, { useEffect ,useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Center, Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Container, Center, Box, Flex, Heading, Button, Text } from '@chakra-ui/react';
 import { addHotSpot } from "react-pannellum"
 
 import { getApartmentByID } from "../Tableland"
 import Image360 from '../components/Image360'
 
-function ApartmentDetail() {
+function ApartmentDetail({ contract360AF }) {
   const { id } = useParams()
 
   const [imageURL, setImageURL] = useState(null)
@@ -39,6 +39,17 @@ function ApartmentDetail() {
     }
   }
 
+
+  const renewListing = async () => {
+    try {
+      const transaction = await contract360AF.renewListing(id)
+      const tx = await transaction.wait()
+      console.log(tx)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <Container maxW='1200px'>
       <Center>
@@ -53,6 +64,13 @@ function ApartmentDetail() {
           <Text textAlign="left" fontSize="xl" mt="4">
             {apartment.number_of_rooms} rooms
           </Text>
+
+          <Flex justifyContent="space-between" alignItems="center" mt="3" mb="4">
+            <Text>Expire in {apartment.expire_date}</Text>
+            <Button onClick={renewListing}>
+              Renew
+            </Button>
+          </Flex>
         </Box>
       </Center>
     </Container>

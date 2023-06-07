@@ -23,7 +23,7 @@ function App() {
           <Route
             path="/apartmentdetail/:id"
             element={
-              <ApartmentDetail />} />
+              <ApartmentDetail contract360AF={contract360AF} />} />
           <Route
             path="/addapartment"
             element={
