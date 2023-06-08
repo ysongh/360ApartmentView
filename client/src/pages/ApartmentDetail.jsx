@@ -5,6 +5,7 @@ import { addHotSpot } from "react-pannellum"
 
 import { getApartmentByID } from "../Tableland"
 import Image360 from '../components/Image360'
+import { formatDate } from '../utils/format';
 
 function ApartmentDetail({ contract360AF }) {
   const { id } = useParams()
@@ -18,7 +19,9 @@ function ApartmentDetail({ contract360AF }) {
 
   const getApartment = async () => {
     try {
-      const newApartment = await getApartmentByID(id)
+      let newApartment = await getApartmentByID(id)
+      const newDate = await formatDate(newApartment[0].expire_date)
+      newApartment[0].expire_date = newDate
       console.log(newApartment)
       setImageURL(newApartment[0].apt_url)
       setApartment(newApartment[0])
