@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 
 import ApartmentFinder from '../../artifacts/contracts/Apartment360.sol/Apartment360.json'
 
-const CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+const CONTRACT_ADDRESS = "0xf7789cb99946C4E53f506F4415bB441BD03A69bD"
 
 function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
   const [chainName, setChainName] = useState('');
@@ -21,7 +21,7 @@ function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
       const contract = new ethers.Contract(CONTRACT_ADDRESS, ApartmentFinder.abi, signer);
       console.log(contract);
       setContract360AF(contract);
-      setChainName("Localhost");
+      setChainName("Polygon Testnet");
 
     } catch(error) {
       console.error(error);
