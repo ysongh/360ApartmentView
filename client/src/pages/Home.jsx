@@ -33,7 +33,7 @@ function Home() {
               <Heading fontSize='lg' mt='3'>{d.location}, {d.number_of_rooms} Rooms</Heading>
             </CardBody>
             <CardFooter>
-              <Button mr='2'  onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
+              <Button mr='5' bg="#0b8457" color="white" onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
                 View 
               </Button>
               <Text fontSize='lg' mt='1'>${d.price} per month</Text>

@@ -70,7 +70,7 @@ function ApartmentDetail({ contract360AF }) {
 
           <Flex justifyContent="space-between" alignItems="center" mt="3" mb="4">
             <Text>Expire in {apartment.expire_date}</Text>
-            <Button onClick={renewListing}>
+            <Button onClick={renewListing} bg="#0b8457" color="white">
               Renew
             </Button>
           </Flex>

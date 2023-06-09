@@ -172,7 +172,7 @@ function AddApartment({ contract360AF }) {
             <Input value={price} onChange={(e) => setPrice(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" mb="3" onClick={submitUpload} isLoading={loading} loadingText='Submitting'>
+          <Button mt="4" mb="3" px="16" onClick={submitUpload} isLoading={loading} loadingText='Submitting' bg="#0b8457" color="white">
             Add
           </Button>
           <br />

@@ -34,14 +34,14 @@ function Navbar({ ethAddress, setETHAddress, setContract360AF }) {
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
             <Link as={ReactLink} to="/">
-              <Heading color="green" mt="3" mb="5">360 APT</Heading>
+              <Heading color="#0b8457" mt="3" mb="5">360 APT</Heading>
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/addapartment">Add Apartment</Link>
           <Spacer />
           {chainName && <p><Badge bgColor="green.300" fontSize='.9rem'>{chainName}</Badge></p>}
-          <Button onClick={connectMetamask}>
+          <Button onClick={connectMetamask} bg="#0b8457" color="white">
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
         </Flex>
