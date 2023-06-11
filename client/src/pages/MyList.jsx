@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, SimpleGrid, Heading, Card, CardBody, CardFooter, Image, Button, Text } from '@chakra-ui/react'
 
-import { getApartments, } from "../Tableland";
+import { getApartmentByAddress } from "../Tableland";
 
-function MyList() {
+function MyList({ ethAddress }) {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
@@ -15,7 +15,7 @@ function MyList() {
 
   const loadData = async () => {
     try {
-      const apartments = await getApartments();
+      const apartments = await getApartmentByAddress(ethAddress);
       setData(apartments)
     } catch (error) {
       console.error(error)

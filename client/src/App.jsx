@@ -32,7 +32,7 @@ function App() {
           <Route
             path="/mylisting"
             element={
-              <MyList />} />
+              <MyList ethAddress={ethAddress} />} />
           <Route
             path="/"
             element={
