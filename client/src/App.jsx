@@ -24,7 +24,7 @@ function App() {
           <Route
             path="/apartmentdetail/:id"
             element={
-              <ApartmentDetail contract360AF={contract360AF} />} />
+              <ApartmentDetail ethAddress={ethAddress} contract360AF={contract360AF} />} />
           <Route
             path="/addapartment"
             element={

@@ -7,7 +7,7 @@ import { getApartmentByID } from "../Tableland"
 import Image360 from '../components/Image360'
 import { formatDate } from '../utils/format';
 
-function ApartmentDetail({ contract360AF }) {
+function ApartmentDetail({ ethAddress, contract360AF }) {
   const { id } = useParams()
 
   const [imageURL, setImageURL] = useState(null)
@@ -68,12 +68,12 @@ function ApartmentDetail({ contract360AF }) {
             {apartment.number_of_rooms} rooms
           </Text>
 
-          <Flex justifyContent="space-between" alignItems="center" mt="3" mb="4">
+          {apartment.owner === ethAddress && <Flex justifyContent="space-between" alignItems="center" mt="3" mb="4">
             <Text>Expire in {apartment.expire_date}</Text>
             <Button onClick={renewListing} bg="#0b8457" color="white">
               Renew
             </Button>
-          </Flex>
+          </Flex>}
         </Box>
       </Center>
     </Container>

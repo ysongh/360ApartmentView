@@ -36,7 +36,7 @@ function MyList({ ethAddress }) {
               <Button mr='5' bg="#0b8457" color="white" onClick={() => navigate(`/apartmentdetail/${d.id}`)}>
                 View 
               </Button>
-              <Text fontSize='lg' mt='1'>{!d.is_show && "Expired"}</Text>
+              {/* <Text fontSize='lg' mt='1'>{!d.is_show && "Expired"}</Text> */}
             </CardFooter>
           </Card>
         ))}
