@@ -18,6 +18,11 @@ module.exports = {
       url: "https://rpc.ankr.com/filecoin_testnet",
       accounts: [process.env.PRIVATEKEY],
     },
+    // npx hardhat run scripts/deploy.js --network filecoin-calibration
+    "filecoin-calibration": {
+      url: "https://api.calibration.node.glif.io/rpc/v1",
+      accounts: [process.env.PRIVATEKEY],
+    },
     // npx hardhat run scripts/deploy.js --network mumbai
     "mumbai": {
       url: "https://rpc-mumbai.maticvigil.com/",
